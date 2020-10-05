@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 
 @Entity
-public class Voiture {
+public class Car {
     private @Id
     @GeneratedValue
     Long id;
@@ -15,10 +15,10 @@ public class Voiture {
     private String nom;
     private int prix;
 
-    Voiture() {
+    Car() {
     }
 
-    public Voiture(String marque, String nom, int prix) {
+    public Car(String marque, String nom, int prix) {
 
         this.marque = marque;
         this.nom = nom;
@@ -62,11 +62,11 @@ public class Voiture {
 
         if (this == o)
             return true;
-        if (!(o instanceof Voiture))
+        if (!(o instanceof com.example.projetSiteVoiture.model.Car))
             return false;
-        Voiture voiture = (Voiture) o;
-        return Objects.equals(this.id, voiture.id) && Objects.equals(this.marque, voiture.marque)
-                && Objects.equals(this.nom, voiture.nom) && Objects.equals(this.prix, voiture.prix);
+        com.example.projetSiteVoiture.model.Car car = (com.example.projetSiteVoiture.model.Car) o;
+        return Objects.equals(this.id, car.id) && Objects.equals(this.marque, car.marque)
+                && Objects.equals(this.nom, car.nom) && Objects.equals(this.prix, car.prix);
     }
 
     @Override
