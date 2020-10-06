@@ -1,5 +1,6 @@
 package com.example.projetSiteVoiture.properties;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -67,6 +68,13 @@ public class FileSystemStorageService implements IFileSytemStorage {
         }
         catch (MalformedURLException e) {
             throw new FileNotFoundException("Could not download file");
+        }
+    }
+
+    public void deleteFile(String fileName){
+        File file = new File(this.dirLocation+"/"+fileName);
+        if(file.exists()) {
+            file.delete();
         }
     }
 }

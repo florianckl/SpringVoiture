@@ -3,19 +3,25 @@ package com.example.projetSiteVoiture.controller;
 import com.example.projetSiteVoiture.exception.CarException;
 import com.example.projetSiteVoiture.model.Car;
 import com.example.projetSiteVoiture.model.FileResponse;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.projetSiteVoiture.model.FileResponse;
+import com.example.projetSiteVoiture.properties.FileSystemStorageService;
 import com.example.projetSiteVoiture.properties.IFileSytemStorage;
 import com.example.projetSiteVoiture.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 
 import org.springframework.hateoas.IanaLinkRelations;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +38,7 @@ public class CarController {
     @Autowired
     private final CarRepository repository;
     @Autowired
-    IFileSytemStorage fileSytemStorage;
+    private FileSystemStorageService fileSytemStorage;
 
     private final CarModelAssembler assembler;
 
@@ -45,6 +51,16 @@ public class CarController {
     List<Car> all() {
         List<Car> cars = (List<Car>) repository.findAll();
         return cars;
+    }
+
+    @GetMapping("/download/{filename:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String filename) throws FileNotFoundException {
+
+        Resource resource = fileSytemStorage.loadFile(filename);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 
     @PostMapping("/add")
@@ -98,8 +114,9 @@ public class CarController {
         return assembler.toModel(car);
     }
 
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping("/cars/delete/{id}")
     ResponseEntity<?> suppVoiture(@PathVariable Long id) {
+        fileSytemStorage.deleteFile(repository.findById(id).get().getImage());
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

@@ -15,7 +15,7 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(com.example.projetSiteVoiture.repository.CarRepository carRepository) {
 
         return args -> {
-            carRepository.save(new com.example.projetSiteVoiture.model.Car("merco", "cla", 30000));
+            carRepository.save(new com.example.projetSiteVoiture.model.Car("merco", "cla", 30000,"capture2.png"));
             carRepository.findAll().forEach(voiture -> {
                 log.info("Preloaded " + voiture);
             });

@@ -14,12 +14,21 @@ public class Car {
     private String marque;
     private String nom;
     private int prix;
+    private String image;
 
     Car() {
     }
 
-    public Car(String marque, String nom, int prix) {
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Car(String marque, String nom, int prix,String image) {
+        this.image=image;
         this.marque = marque;
         this.nom = nom;
         this.prix = prix;
