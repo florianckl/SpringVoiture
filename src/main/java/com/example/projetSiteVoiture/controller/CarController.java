@@ -2,9 +2,12 @@ package com.example.projetSiteVoiture.controller;
 
 import com.example.projetSiteVoiture.exception.CarException;
 import com.example.projetSiteVoiture.model.Car;
+import com.example.projetSiteVoiture.model.FileResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.projetSiteVoiture.model.FileResponse;
+import com.example.projetSiteVoiture.properties.IFileSytemStorage;
 import com.example.projetSiteVoiture.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -12,15 +15,12 @@ import org.springframework.hateoas.EntityModel;
 
 import org.springframework.hateoas.IanaLinkRelations;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.methodOn;
@@ -31,6 +31,8 @@ public class CarController {
 
     @Autowired
     private final CarRepository repository;
+    @Autowired
+    IFileSytemStorage fileSytemStorage;
 
     private final CarModelAssembler assembler;
 
@@ -41,14 +43,11 @@ public class CarController {
 
     @GetMapping("/cars")
     List<Car> all() {
-
-        List<Car> cars = (List<Car>) repository.findAll();//
-        repository.findAll().forEach(cars::add);
-
+        List<Car> cars = (List<Car>) repository.findAll();
         return cars;
     }
 
-    @PostMapping("/cars")
+    @PostMapping("/add")
     ResponseEntity<?> newcar(@RequestBody Car nouvCar) {
 
         EntityModel<Car> entityModel = assembler.toModel(repository.save(nouvCar));
@@ -56,6 +55,18 @@ public class CarController {
         return ResponseEntity //
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
                 .body(entityModel);
+    }
+
+    @PostMapping("/uploadfile")
+    public ResponseEntity<FileResponse> uploadSingleFile (@RequestParam("file") MultipartFile file) {
+        String upfile = fileSytemStorage.saveFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/api/download/")
+                .path(upfile)
+                .toUriString();
+
+        return ResponseEntity.status(HttpStatus.OK).body(new FileResponse(upfile,fileDownloadUri,"File uploaded with success!"));
     }
 
     @PutMapping("/cars/{id}")
