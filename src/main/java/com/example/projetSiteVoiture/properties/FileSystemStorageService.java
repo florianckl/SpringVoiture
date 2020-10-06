@@ -1,19 +1,19 @@
 package com.example.projetSiteVoiture.properties;
 
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import javax.annotation.PostConstruct;
+
+import com.example.projetSiteVoiture.exception.FileStorageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.api.downupload.exception.FileNotFoundException;
-import com.api.downupload.exception.FileStorageException;
-import com.api.downupload.properties.FileUploadProperties;
 
 @Service
 public class FileSystemStorageService implements IFileSytemStorage {
@@ -52,7 +52,7 @@ public class FileSystemStorageService implements IFileSytemStorage {
     }
 
     @Override
-    public Resource loadFile(String fileName) {
+    public Resource loadFile(String fileName) throws FileNotFoundException {
         // TODO Auto-generated method stub
         try {
             Path file = this.dirLocation.resolve(fileName).normalize();

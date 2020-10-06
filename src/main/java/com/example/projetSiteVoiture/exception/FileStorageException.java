@@ -1,13 +1,15 @@
-package com.example.projetSiteVoiture.properties;
+package com.example.projetSiteVoiture.exception;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class FileStorageException extends RuntimeException {
     private String message;
+
+    public FileStorageException(String s) {
+        this.message=s;
+    }
 }
