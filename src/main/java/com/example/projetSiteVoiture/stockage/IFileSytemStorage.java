@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.properties;
+package com.example.projetSiteVoiture.stockage;
 
 
 import org.springframework.core.io.Resource;
@@ -10,4 +10,5 @@ public interface IFileSytemStorage {
     void init();
     String saveFile(MultipartFile file);
     Resource loadFile(String fileName) throws FileNotFoundException;
+    public void deleteFile(String fileName);
 }
