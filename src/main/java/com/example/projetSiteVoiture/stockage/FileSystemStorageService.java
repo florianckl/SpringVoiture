@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.properties;
+package com.example.projetSiteVoiture.stockage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import javax.annotation.PostConstruct;
 
 import com.example.projetSiteVoiture.exception.FileStorageException;
+import com.example.projetSiteVoiture.properties.FileUploadProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

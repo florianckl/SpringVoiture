@@ -4,22 +4,16 @@ import com.example.projetSiteVoiture.exception.CarException;
 import com.example.projetSiteVoiture.model.Car;
 import com.example.projetSiteVoiture.model.FileResponse;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.example.projetSiteVoiture.model.FileResponse;
-import com.example.projetSiteVoiture.properties.FileSystemStorageService;
-import com.example.projetSiteVoiture.properties.IFileSytemStorage;
+import com.example.projetSiteVoiture.stockage.FileSystemStorageService;
 import com.example.projetSiteVoiture.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 
 import org.springframework.hateoas.IanaLinkRelations;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,9 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-
-import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.methodOn;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
