@@ -44,6 +44,18 @@ public class CarController {
         return cars;
     }
 
+    @GetMapping("/cars/sortByPrix")
+    List<Car> allSortByPrix() {
+        List<Car> cars = (List<Car>) repository.findByOrderByPrix();
+        return cars;
+    }
+
+    @GetMapping("/cars/sortByMarque")
+    List<Car> allSortByMarque() {
+        List<Car> cars = (List<Car>) repository.findByOrderByMarque();
+        return cars;
+    }
+
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String filename) throws FileNotFoundException {
 
