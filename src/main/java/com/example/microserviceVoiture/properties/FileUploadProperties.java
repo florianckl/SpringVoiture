@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.properties;
+package com.example.microserviceVoiture.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

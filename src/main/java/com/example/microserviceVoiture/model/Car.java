@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.model;
+package com.example.microserviceVoiture.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,6 +8,16 @@ import javax.persistence.Entity;
 
 @Entity
 public class Car {
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    private String type;
     private @Id
     @GeneratedValue
     Long id;
@@ -28,6 +38,7 @@ public class Car {
     }
 
     public Car(String marque, String nom, int prix,String image) {
+        this.type="voiture";
         this.image=image;
         this.marque = marque;
         this.nom = nom;
@@ -71,9 +82,9 @@ public class Car {
 
         if (this == o)
             return true;
-        if (!(o instanceof com.example.projetSiteVoiture.model.Car))
+        if (!(o instanceof com.example.microserviceVoiture.model.Car))
             return false;
-        com.example.projetSiteVoiture.model.Car car = (com.example.projetSiteVoiture.model.Car) o;
+        com.example.microserviceVoiture.model.Car car = (com.example.microserviceVoiture.model.Car) o;
         return Objects.equals(this.id, car.id) && Objects.equals(this.marque, car.marque)
                 && Objects.equals(this.nom, car.nom) && Objects.equals(this.prix, car.prix);
     }

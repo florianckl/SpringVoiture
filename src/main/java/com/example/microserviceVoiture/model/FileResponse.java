@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.model;
+package com.example.microserviceVoiture.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.exception;
+package com.example.microserviceVoiture.exception;
 
 public class CarException extends RuntimeException {
 

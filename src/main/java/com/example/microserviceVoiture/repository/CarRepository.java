@@ -1,6 +1,6 @@
-package com.example.projetSiteVoiture.repository;
+package com.example.microserviceVoiture.repository;
 
-import com.example.projetSiteVoiture.model.Car;
+import com.example.microserviceVoiture.model.Car;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

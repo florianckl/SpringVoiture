@@ -1,4 +1,4 @@
-package com.example.projetSiteVoiture.stockage;
+package com.example.microserviceVoiture.stockage;
 
 
 import org.springframework.core.io.Resource;

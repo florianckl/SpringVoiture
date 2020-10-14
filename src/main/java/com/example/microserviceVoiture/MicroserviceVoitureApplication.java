@@ -1,6 +1,6 @@
-package com.example.projetSiteVoiture;
+package com.example.microserviceVoiture;
 
-import com.example.projetSiteVoiture.properties.FileUploadProperties;
+import com.example.microserviceVoiture.properties.FileUploadProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -10,9 +10,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties({
 		FileUploadProperties.class
 })
-public class ProjetSiteVoitureApplication {
+public class MicroserviceVoitureApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ProjetSiteVoitureApplication.class, args);
+		SpringApplication.run(MicroserviceVoitureApplication.class, args);
 	}
 
 }
